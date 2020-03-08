@@ -35,6 +35,24 @@ def print_options():
     print('q: Quit')
 
 
+def verify_chain():
+    block_index = 0
+    is_valid = True
+    for block in blockchain:
+        print('blockkkk', block)
+        print('indexxx', block_index)
+        if block_index == 0:
+            block_index += 1
+            continue
+        elif block[0] == blockchain[block_index - 1]:
+            is_valid = True
+        else:
+            is_valid = False
+            break
+        block_index += 1
+    return is_valid
+
+
 while True:
     print_options()
     user_choice = get_user_choice()
@@ -50,6 +68,8 @@ while True:
         break
     else:
         print('Invalid command. Please chose one from the list')
-    print('Choice registered!')
+    if not verify_chain():
+        print('Invalid blockchain!')
+        break
 
 print('Done!')
